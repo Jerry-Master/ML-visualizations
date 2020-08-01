@@ -22,7 +22,17 @@ To see the page you can download the package and all its content and execute ind
 
 The first sketch are visualized through P5.js, a library of JavaScript. It is no more than a square where anything can be implemented. We will also work with python to make the calculations and export some premade visualizations.
 
+### 3D rendering
+
+For the 3D rendering we will be using a library of P5 called P3D. A quick preview is made on [this video](https://www.youtube.com/watch?v=p4Iz0XJY-Qk).
+
+### Matplotlib to JavaScript
+
+There is a thing called mpld3 who claims to be an easy way to translate matplotlib code to javascript. However, we are still learning to use it.
+
 ## References
 
 * [The coding train](https://thecodingtrain.com/)
 * [P5 reference](https://p5js.org/reference/)
+* [P3D](https://processing.org/tutorials/p3d/)
+* [MPLD3](https://mpld3.github.io/)
