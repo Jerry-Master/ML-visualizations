@@ -21,3 +21,8 @@ To see the page you can download the package and all its content and execute ind
 ## Coding language
 
 The first sketch are visualized through P5.js, a library of JavaScript. It is no more than a square where anything can be implemented. We will also work with python to make the calculations and export some premade visualizations.
+
+## References
+
+* [The coding train](https://thecodingtrain.com/)
+* [P5 reference](https://p5js.org/reference/)
