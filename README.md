@@ -36,3 +36,4 @@ There is a thing called mpld3 who claims to be an easy way to translate matplotl
 * [P5 reference](https://p5js.org/reference/)
 * [P3D](https://processing.org/tutorials/p3d/)
 * [MPLD3](https://mpld3.github.io/)
+* [ConvNN visualizations](https://cs.stanford.edu/people/karpathy/convnetjs/)
