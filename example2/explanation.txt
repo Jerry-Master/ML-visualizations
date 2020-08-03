@@ -1,0 +1,7 @@
+this simple example is a very simplified case of an idea to be implemented. The idea is to see the evolution of the wheights of a neural network through the changing color of the lines representing the wheights.
+
+To do:
+    - Search for a dataset simple enough to have a single layer neural network with 3 or 4 hidden neurons.
+    - Find a way to have the abstraction of the NN (the value of the weights, the MSE of the network in a certain state...)
+    - Find a way to write cool text
+    - Draw the network elegantly (in a graphic and coding sense)
