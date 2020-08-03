@@ -1,6 +1,43 @@
+let arch = [];
+let real_arch = [];
+
+let input, button, button2, texto;
+
 function setup() {
   createCanvas(800, 600);
 
+  input = createInput();
+  input.position(width / 2, height - 30);
+
+  button = createButton('Add layer');
+  button.position(input.x + input.width, input.y);
+  button.size(100, input.height);
+  button.mousePressed(add_layer);
+  
+  button2 = createButton('Create');
+  button2.position(button.x + button.width, button.y);
+  button2.size(70, input.height);
+  button2.mousePressed(create_nn);
+
+  texto = createElement('h2', 'Enter architecture');
+  texto.position(input.x, input.y - 80);
+  texto.size(400, 50);
+
+  textAlign(CENTER);
+  textSize(50);
+}
+
+// Adds a layer to the architecture, input and output are included as layers
+function add_layer(){
+  arch.push(parseInt(input.value(), 10));
+  input.value('');
+}
+
+// Activates the drawing of the NN
+function create_nn(){
+  print(arch);
+  real_arch = arch;
+  arch = [];
 }
 
 function draw() {
@@ -10,7 +47,7 @@ function draw() {
   corners();
   
   // Draw NN
-  draw_nn([3,4, 6,1]);
+  draw_nn(real_arch);
 }
 
 function corners(){
