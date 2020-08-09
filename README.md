@@ -37,13 +37,17 @@ Now, we need a way to create that request mentioned above. There is a jQuery lib
 
 This part is executed inside the JavaScript program.
 
-#### Example
+#### Example3
 
 In the folder Example3 there is a simple page with just a button. By pressing it a http request to the address `localhost:8888` is made. At the same time, the script `http_request.py` is running in the background and printing something when the button is called. To run this example, first execute the python script in the console and then open `index.html` in a browser. 
 
 ### Part 2
 
 The main problem with doing it as mentioned above is that the request is being made multiple times, and we still don't know the reason for it nor how to correct it. So, the second approach relies in using a python library prepared to handle everything: Flask
+
+#### Example4
+
+It is the same as Example3 except that is called Example4 and it works properly. The execution here is different. First, you execute the python program from terminal: `server.py`, then open a browser and access the url given in terminal, it should be `http://127.0.0.1:5000/`. Now, when pressing the button, the function `do_something` is executed only once.
 
 ## Coding languages
 
