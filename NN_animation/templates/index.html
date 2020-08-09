@@ -1,0 +1,16 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} Neural Networks {% endblock title %}
+
+{% block head %}
+{{ super() }}
+<script src={{ url_for('send_static', path='p5.js') }}></script>
+<script src={{ url_for('send_static', path='p5.sound.min.js') }}></script>
+<script src={{ url_for('send_static', path='jquery.min.js') }}></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+<meta charset="utf-8">
+
+<script src={{ url_for('send_static', path='drawing_nn.js') }}></script>
+<script src={{ url_for('send_static', path='animate_text.js') }}></script>
+<script src={{ url_for('send_static', path='button_functions.js') }}></script>
+<script src={{ url_for('send_static', path='sketch.js') }}></script>
+{% endblock head %}
