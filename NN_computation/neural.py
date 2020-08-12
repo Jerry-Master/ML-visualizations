@@ -29,6 +29,10 @@ class NeuralNetwork(nn.Module):
         for i in range(len(self.nNeurons)-1):
             self.W.add_module("l"+str(i),nn.Linear(nNeurons[i], nNeurons[i+1]))
 
+        # Loss function and optimizer
+        self.criterion = nn.MSELoss()
+        self.optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
+
     def forward(self, X):
         x = X
         for i in range(len(self.nNeurons)-1):
@@ -51,20 +55,17 @@ class NeuralNetwork(nn.Module):
 
 
     def backward(self, X, y, o):
-        # this lines should go in some kind of global space (?)
-        criterion = nn.MSELoss()
-        optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         # ---
         # Reset gradient
-        # optimizer.zero_grad() ?
-        loss = criterion(o, y)
+        self.optimizer.zero_grad() 
+        loss = self.criterion(o, y)
         loss.backward()
-        optimizer.step()
+        self.optimizer.step()
 
     def train(self, X, y):
         # forward + backward pass for training
-        o = self.forward(X)
-        self.backward(X, y, o)
+        out = self.forward(X)
+        self.backward(X, y, out)
 
     def saveWeights(self, model):
         # we will use the PyTorch internal storage functions
@@ -99,7 +100,7 @@ def main():
     ## read the data from user {
     filename = 'simpledata'
     n = 2 # size of the imput
-    m = 1 # size pf the output
+    m = 1 # size of the output
     # data read: filename, n, m}
     data = pd.read_csv(filename + '.csv')
     X = torch.tensor(data.values[:,0:n], dtype = torch.float)
@@ -124,4 +125,5 @@ def main():
         k += 1
     write_json(epochDict)
 
-main()
+if __name__=='__main__':
+    main()
