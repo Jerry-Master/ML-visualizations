@@ -51,6 +51,7 @@ function draw_layer(num_neur, x_pos, diam) {
   let ver_dist = height / (num_neur+1);
   for (let i = 1; i <= num_neur; i++) {
     fill(255, 255, 255);
+    stroke(0);
     circle(x_pos, ver_dist * i, diam);
   }
 }
@@ -70,15 +71,28 @@ function draw_connections(i, j, ni, nj, hor_dist, rad, arch) {
       r.mult(1.2);
       end.sub(r);
       
-      draw_arrow(begin, end);
+      // Obtain color from real weights
+      let curr_layer = nn[str(iteration[i])].weights[str(i)];
+      let neuron_from = ii-1;
+      let neuron_to = jj-1;
+      let alpha = curr_layer[neuron_to][neuron_from];
+      let scale = 200;
+      draw_arrow(begin, end, alpha * scale);
     }
   }
 }
 
 // Draws an arrow with begin and end as the ending points of the arrow
-function draw_arrow(begin, end){
+function draw_arrow(begin, end, alpha){
   //begin = createVector(begin[0], begin[1]);
   //end = createVector(end[0], end[1]);
+  if (alpha < 0) {
+    stroke(255, 0, 0, -alpha);
+    fill(255, 0, 0, -alpha);
+  } else {
+    stroke(0, 0, 255, alpha);
+    fill(0, 0, 255, alpha);
+  }
   line(begin.x, begin.y, end.x, end.y);
   let v = p5.Vector.sub(end, begin);
   v.mult(3 / v.mag());
@@ -87,7 +101,6 @@ function draw_arrow(begin, end){
   let a2 = p5.Vector.add(end, v);
   v.rotate(2 * PI / 3);
   let a3 = p5.Vector.add(end, v);
-  fill(0,0,0);
   triangle(a1.x, a1.y, a2.x, a2.y, a3.x, a3.y);
 }
 

@@ -1,16 +1,24 @@
+// no protect
 let arch = [];
 let real_arch = [];
 
-let input, button, button2, animate_button, texto;
+let input, button, button2, animate_button, iterate_button, texto;
 
-let animate = false;
+let animate = false, method = "forward";
 let layer = 0;
 let values = [];
+
+let nn, iteration = [], start_it = false;
+
+
+function preload(){
+  nn = loadJSON('static/out2.json');
+} 
 
 
 function setup() {
   createCanvas(800, 600);
-
+  
   input = createInput();
   input.position(width / 2, height - 30);
 
@@ -35,10 +43,10 @@ function setup() {
   animate_button.position(width / 2, 0);
   animate_button.mousePressed(next_animation);
   
+  iterate_button = createButton('Start iterating');
+  iterate_button.position(width / 2 - 150, 0);
+  iterate_button.mousePressed(start_iteration);
   
-  python_button = createButton('Compute Forward');
-  python_button.position(width / 3, 0);
-  python_button.mousePressed(goPython);
 }
 
 function keyPressed(){
@@ -59,5 +67,14 @@ function draw() {
 
   // Display animations
   display_anim();
+  
+  // Increase iterations if needed
+  if (start_it) {
+    let n = iteration.length;
+    for (let i = 0; i < n; i++) {
+      iteration[i] = iteration[i] + 100;
+      if (iteration[i] >= 10000) iteration[i] = 9999; 
+    }
+  }
   
 }

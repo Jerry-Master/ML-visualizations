@@ -6,7 +6,30 @@ function add_layer() {
 
   arch.push(parseInt(input.value(), 10));
   input.value('');
-  values.push([]);
+  //values.push([]);
+  iteration.push(0);
+}
+
+// Adds input values to input neurons
+function init_input(){
+  // Restart all values
+  values = [];
+  for (let i = 0; i < real_arch.length; i++) values.push([]);
+  
+  for (let i = 0; i < real_arch[0]; i++) {
+    for (let j = 0; j < real_arch[1]; j++) {
+      let pos = neuron_pos(0, i + 1, real_arch);
+      // Set name to its real value
+      let valor = nn[str(iteration[0])].forward["0"][i].toExponential(2);
+      let new_val = new value(str(valor), pos.x, pos.y, [3, 45, 100], 10); 
+      // To be done
+      new_val.set_traj(0, i + 1, j + 1, real_arch);
+      values[1].push(new_val);
+    }
+  }
+  
+  // Reset animation
+  layer = 1;
 }
 
 // Activates the drawing of the NN and adds as many animating objects as input neurons
@@ -15,33 +38,25 @@ function create_nn() {
   real_arch = arch;
   arch = [];
 
-  // Adds objects
-  for (let i = 0; i < real_arch[0]; i++) {
-    for (let j = 0; j < real_arch[1]; j++) {
-      let pos = neuron_pos(0, i + 1, real_arch);
-      let new_val = new value('x' + str(i), pos.x, pos.y, [3, 45, 100]);
-      new_val.set_traj(0, i + 1, j + 1, real_arch);
-      values[1].push(new_val);
-    }
-  }
-
-  // Reset animation
-  layer = 1;
+  init_input();
 }
 
 // Starts animation
 function next_animation() {
   // Check wether there is an available animation
-  animate = (layer < (real_arch.length));
+  animate = true;
+  if (layer >= (real_arch.length)){
+    method = "backward";
+  }
 }
 
-// Executes the python script
-function goPython() {
-  const URL = '/something';
-  $.ajax({
-    url: URL,
-    type: "GET",
-  }).done(function() {
-    alert('finished python script');
-  });
+// Starts iterations
+function start_iteration() {
+  if (start_it) {
+    iterate_button.html("Continue iterating");
+    start_it = false;
+  } else {
+    iterate_button.html("Stop iterating");
+    start_it = true;
+  }
 }
