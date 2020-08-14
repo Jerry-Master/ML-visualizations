@@ -110,8 +110,8 @@ function backward() {
     method = "forward";
   } else {
     layer--;
-    iteration[layer-1] = iteration[layer-1] + 1000;
-    if (iteration[layer-1] >= 10000) iteration[layer-1] = 9999;
+    iteration[layer-1] = iteration[layer-1] + step_size;
+    if (iteration[layer-1] >= maxEpoch) iteration[layer-1] = maxEpoch-1;
   }
   animate = false;
 }

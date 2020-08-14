@@ -80,8 +80,7 @@ class NeuralNetwork(nn.Module):
 
 # auxiliar function to write the data of the network in a .json file
 # filename ?
-def write_json(data):
-    filename = "out.json"
+def write_json(data, filename):
     with open(filename, 'w') as file:
         json.dump(data, file)
 
@@ -94,6 +93,40 @@ def save_as_dict(net, X, y):
         d['forward'][i] = forward[i].tolist()
         d['weights'][i] = net.W[i].weight.detach().tolist()
     return d
+
+
+# MAIN UTILITY
+# Format: filename without .csv (but referring to it)
+# arch is a list of the size of each layer, input and output included
+# outfile is the complete name with extension .json
+# maxEpoch is the number epoch before it stops
+# tol is the tolerance admitted
+import os
+def generate_json(filename, arch, maxEpoch, tol):
+    # Number of input and output features
+    num_in = arch[0]
+    num_out = arch[-1]
+
+    # Read and create valid dataset
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    data = pd.read_csv(dir_path + '/' + filename + '.csv')
+    X = torch.tensor(data.values[:,0:num_in], dtype = torch.float)
+    y = torch.tensor(data.values[:,num_in:num_in+num_out], dtype = torch.float)
+
+    # Create layers of the NN
+    network = NeuralNetwork(arch)
+
+    epochDict = {}
+    ## Train the network with the data and save all the intermediate steps in a .json
+    k = 0
+    o = network.forward(X)
+    while torch.mean((y-o)**2).detach().item() > tol and k < maxEpoch:
+        network.train(X, y)
+        o = network.forward(X)
+        epochDict[k] = save_as_dict(network, X, y)
+        k += 1
+        # print(torch.mean((y-o)**2).detach().item())
+    return epochDict
 
 # main function to execute
 def main():
@@ -116,14 +149,15 @@ def main():
 
     epochDict = {}
     ## Train the network with the data and save all the intermediate steps in a .json
-    maxEpoch, k = 100, 0
+    maxEpoch, k = 10000, 0
     o = network.forward(X)
     while torch.mean((y-o)**2).detach().item() > 1e-3 and k < maxEpoch:
         network.train(X, y)
         o = network.forward(X)
         epochDict[k] = save_as_dict(network, X, y)
         k += 1
-    write_json(epochDict)
+        print(torch.mean((y-o)**2).detach().item())
+    write_json(epochDict, "out.json")
 
 if __name__=='__main__':
     main()

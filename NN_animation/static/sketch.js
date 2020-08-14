@@ -5,15 +5,11 @@ let real_arch = [];
 let input, button, button2, animate_button, iterate_button, texto;
 
 let animate = false, method = "forward";
-let layer = 0;
+let layer = 0, maxEpoch = 10000, tol = 1e-3, step_size = 1000, step_size_evol = 100;
+let input_file = "simpledata";
 let values = [];
 
 let nn, iteration = [], start_it = false;
-
-
-function preload(){
-  nn = loadJSON('static/out2.json');
-} 
 
 
 function setup() {
@@ -72,8 +68,8 @@ function draw() {
   if (start_it) {
     let n = iteration.length;
     for (let i = 0; i < n; i++) {
-      iteration[i] = iteration[i] + 100;
-      if (iteration[i] >= 10000) iteration[i] = 9999; 
+      iteration[i] = iteration[i] + step_size_evol;
+      if (iteration[i] >= maxEpoch) iteration[i] = maxEpoch-1; 
     }
   }
   

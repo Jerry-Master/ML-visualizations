@@ -1,5 +1,10 @@
-from flask import Flask, render_template, url_for, send_from_directory
+from flask import Flask, render_template, url_for, send_from_directory, jsonify, request
 from flask_bootstrap import Bootstrap
+
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, './NN_computation')
+from neural import generate_json
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -15,10 +20,17 @@ def send_static(path):
     return send_from_directory('static', path)
 
 
-@app.route('/something/', methods=['GET', 'POST'])
-def do_something():
-    print("doing something")
-    return "fine"
+@app.route('/compute_json/', methods=['GET', 'POST'])
+def compute_json():
+    # Get parameters
+    data = request.get_json()
+    filename = data['filename']
+    arch = data['arch']
+    maxEpoch = data['maxEpoch']
+    tol = data['tol']
+
+    # Return all the necessary data
+    return jsonify(generate_json(filename, arch, maxEpoch, tol))
 
 
 if __name__ == '__main__':

@@ -34,11 +34,24 @@ function init_input(){
 
 // Activates the drawing of the NN and adds as many animating objects as input neurons
 function create_nn() {
-  // Activate drawing
-  real_arch = arch;
-  arch = [];
 
-  init_input();
+  // Generate training data
+  $.ajax({
+    url: "/compute_json/",
+    type: "POST",
+    data: JSON.stringify({filename: input_file, arch: arch, maxEpoch: maxEpoch, tol: tol}),
+    contentType: "application/json; charset=utf-8",
+    success: function(result) {
+      // Activate drawing
+      real_arch = arch;
+      arch = [];
+      nn = result;
+      init_input();
+    },
+    error: function(error){
+      console:log('Error ${error}');
+    }
+  });
 }
 
 // Starts animation
