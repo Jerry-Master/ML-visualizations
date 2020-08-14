@@ -43,7 +43,7 @@ In the folder Example3 there is a simple page with just a button. By pressing it
 
 ### Part 2
 
-The main problem with doing it as mentioned above is that the request is being made multiple times, and we still don't know the reason for it nor how to correct it. So, the second approach relies in using a python library prepared to handle everything: Flask
+The main problem with doing it as mentioned above is that the request is being made multiple times, and we still don't know the reason for it nor how to correct it. So, the second approach relies in using a python library prepared to handle everything: Flask. Several links explaining how to send JSON data from one file to the other are written down at the reference.
 
 #### Example4
 
@@ -71,3 +71,4 @@ There is a thing called mpld3 who claims to be an easy way to translate matplotl
 * [AJAX tutorial](https://www.freecodecamp.org/news/here-is-the-most-popular-ways-to-make-an-http-request-in-javascript-954ce8c95aaa/)
 * [SocketServer documentation](https://docs.python.org/3/library/socketserver.html#socketserver-tcpserver-example)
 * [BaseHTTPServer documentation](https://docs.python.org/2/library/basehttpserver.html#module-BaseHTTPServer)
+* [Sending array data with jQuery and Flask](https://stackoverflow.com/questions/23889107/sending-array-data-with-jquery-and-flask)
