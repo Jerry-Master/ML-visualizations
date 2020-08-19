@@ -31,7 +31,7 @@ class NeuralNetwork(nn.Module):
 
         # Loss function and optimizer
         self.criterion = nn.MSELoss()
-        self.optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
+        self.optimizer = optim.SGD(self.parameters(), lr=0.001)
 
     def forward(self, X):
         x = X
@@ -84,7 +84,7 @@ def write_json(data, filename):
     with open(filename, 'w') as file:
         json.dump(data, file)
 
-def save_as_dict(net, X, y):
+def save_as_dict(net, X, y, o=None):
     layers = len(net.nNeurons)
     forward = net.forward_mean_allsteps(X)
 
@@ -92,6 +92,8 @@ def save_as_dict(net, X, y):
     for i in range(layers-1):
         d['forward'][i] = forward[i].tolist()
         d['weights'][i] = net.W[i].weight.detach().tolist()
+    if o is not None:
+        d['forward'][layers-1] = [o]
     return d
 
 
@@ -123,9 +125,10 @@ def generate_json(filename, arch, maxEpoch, tol):
     while torch.mean((y-o)**2).detach().item() > tol and k < maxEpoch:
         network.train(X, y)
         o = network.forward(X)
-        epochDict[k] = save_as_dict(network, X, y)
+        epochDict[k] = save_as_dict(network, X, y, torch.mean(o).detach().item())
+        # print(torch.mean(o).detach().item())
         k += 1
-        # print(torch.mean((y-o)**2).detach().item())
+        # print(torch.mean((y-o)**2).detach().item())
     return epochDict
 
 # main function to execute

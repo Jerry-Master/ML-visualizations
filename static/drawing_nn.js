@@ -41,7 +41,7 @@ function draw_nn(arch){
   
   // Draw weights
   for (let i = 0; i < n-1; i++){
-    draw_connections(i, i+1, arch[i], arch[i+1], hor_dist, rad, arch); 
+    draw_connections(i, i+1, arch[i], arch[i+1], rad, arch); 
   }
 }
 
@@ -57,7 +57,7 @@ function draw_layer(num_neur, x_pos, diam) {
 }
 
 // Draw arrows between layer i and j with ni and nj number of neurons
-function draw_connections(i, j, ni, nj, hor_dist, rad, arch) {
+function draw_connections(i, j, ni, nj, rad, arch) {
   for (let ii = 1; ii <= ni; ii++) {
     for (let jj = 1; jj <= nj; jj++) {
       

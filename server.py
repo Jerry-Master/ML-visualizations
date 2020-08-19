@@ -4,7 +4,7 @@ from flask_bootstrap import Bootstrap
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, './NN_computation')
-from neural import generate_json
+from neural import generate_json, write_json
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -30,7 +30,9 @@ def compute_json():
     tol = data['tol']
 
     # Return all the necessary data
-    return jsonify(generate_json(filename, arch, maxEpoch, tol))
+    result = generate_json(filename, arch, maxEpoch, tol)
+    # write_json(result, "debug.json")
+    return jsonify(result)
 
 
 if __name__ == '__main__':
