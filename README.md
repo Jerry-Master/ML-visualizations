@@ -31,7 +31,7 @@ First of all, a server is run which is waiting endlessly for a call to be made. 
 
 This part is run by a python script.
 
-#### Making an HTTP request via AJAX
+#### Making an HTTP request via AJAX
 
 Now, we need a way to create that request mentioned above. There is a jQuery library called AJAX which is going to do the work.
 
