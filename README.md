@@ -17,7 +17,7 @@ The results are expected to show something similar to these:
 
 ## Usage
 
-To see the page you can download the package and all its content and execute index.html locally. In the future there may be a real page with all the visualizations inside. 
+Depending on what you want to try it can be either executed by double clicking the index.html file or in the latest cases by running the server.py file in the terminal and accessing the url shown in a browser.
 
 
 ## Server communication
