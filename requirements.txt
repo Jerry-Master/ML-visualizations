@@ -2,7 +2,7 @@ absl-py==0.8.1
 adjustText==0.7.3
 alembic==1.4.2
 appnope==0.1.0
-asn1crypto==0.24.0
+lsn1crypto==0.24.0
 astor==0.8.0
 astroid==2.0.4
 async-generator==1.10
@@ -10,7 +10,7 @@ atari-py==0.2.6
 attrs==19.3.0
 backcall==0.1.0
 beautifulsoup4==4.8.0
-bleach==3.0.2
+bleach>=3.1.4
 blis==0.4.1
 Bottleneck==1.2.1
 box2d-py==2.3.8
@@ -98,7 +98,7 @@ murmurhash==1.0.2
 nbconvert==5.4.0
 nbformat==4.4.0
 networkx==2.2
-notebook==5.7.0
+notebook>=5.7.8
 numexpr==2.7.0
 numpy==1.17.4
 nvidia-ml-py3==7.352.0
@@ -118,7 +118,7 @@ pbr==5.1.1
 pep8==1.7.1
 pexpect==4.6.0
 pickleshare==0.7.5
-Pillow==5.2.0
+Pillow>=7.1.0
 plac==0.9.6
 ply==3.11
 preshed==3.0.2
@@ -152,7 +152,7 @@ python-slugify==2.0.0
 python-telegram-bot==11.1.0
 pytz==2018.5
 PyVirtualDisplay==0.2.4
-PyYAML==3.13
+PyYAML>=4.2b1
 pyzmq==17.1.2
 qtconsole==4.4.3
 requests==2.23.0
@@ -189,7 +189,7 @@ tqdm==4.24.0
 traitlets==4.3.2
 tweepy==3.8.0
 Unidecode==1.0.23
-urllib3==1.22
+urllib3>=1.24.2
 virtualenv==16.1.0
 virtualenv-clone==0.4.0
 virtualenvwrapper==4.8.2
