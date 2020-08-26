@@ -1,10 +1,11 @@
 let step_counter = 0;
+let arch = [2,3,1];
 
 // the text for each line (should be readed from file?)
-let text_lines = ['repeat','forall n in 1≤n≤N','1. Forward pass Present xn and compute the outputs z(l) of all the units','2. Backward pass Compute the deltas δ(l) j \n of all the units, from l=c+1 down to l=1: (l) ′ (c+1) (c+1)',' a. if l=c+1 then δj :=g(aj )·(zj ',' b. if l < c + 1 then δ(l) := g′(a(l)) 􏰅 δ(l+1)w(l+1) j jqqqj n (l) (l) (l−1)','3.Set∆wji:=δj ·zi','end','Update the weights as wji (t+1) := wji (t)+α ','until convergence or max. epochs'];
+let text_lines = ['repeat','  forall n in 1≤n≤N','    1. Forward pass Present xn and compute the outputs z(l) of all the units','    2. Backward pass Compute the deltas δ(l) j \n    of all the units, from l=c+1 down to l=1: (l) ′ (c+1) (c+1)','      a. if l=c+1 then δj :=g(aj )·(zj ','      b. if l < c + 1 then δ(l) := g′(a(l)) 􏰅 δ(l+1)w(l+1) j jqqqj n (l) (l) (l−1)','    3.Set∆wji:=δj ·zi','  end','  Update the weights as wji (t+1) := wji (t)+α ','until convergence or max. epochs'];
 
 function setup() {
-    createCanvas(800, 600);
+    createCanvas(1400, 700);
 
     textSize(20);
     button = createButton('Next step');
@@ -15,6 +16,7 @@ function setup() {
 
 function draw() {
     background(191);
+    draw_nn(arch);
     draw_lines();
 }
 
@@ -30,14 +32,15 @@ function f(i) {
 }
 
 function draw_lines() {
+    var costat = 700;
     for (let i=0; i < text_lines.length; ++i) {
         if (i == step_counter) {
             fill(255,0,0);
-            text(text_lines[i], 100, f(i))
+            text(text_lines[i], costat, f(i))
         }
         else {
             fill(0)
-            text(text_lines[i], 100, f(i));
+            text(text_lines[i], costat, f(i));
         }
     }
 }
