@@ -20,7 +20,7 @@ function init_input(){
     for (let j = 0; j < real_arch[1]; j++) {
       let pos = neuron_pos(0, i + 1, real_arch);
       // Set name to its real value
-      let valor = nn[str(iteration[0])].forward["0"][i].toExponential(2);
+      let valor = parseFloat(nn[str(iteration[0])].forward["0"][i]).toExponential(2);
       let new_val = new value(str(valor), pos.x, pos.y, [3, 45, 100], 10); 
       // To be done
       new_val.set_traj(0, i + 1, j + 1, real_arch);

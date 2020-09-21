@@ -31,7 +31,7 @@ def compute_json():
 
     # Return all the necessary data
     result = generate_json(filename, arch, maxEpoch, tol)
-    # write_json(result, "debug.json")
+    # write_json(result, "debug.json")
     return jsonify(result)
 
 

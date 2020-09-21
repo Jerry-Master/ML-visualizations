@@ -5,14 +5,21 @@ let real_arch = [];
 let input, button, button2, animate_button, iterate_button, texto;
 
 let animate = false, method = "forward";
-let layer = 0, maxEpoch = 10000, tol = 1e-3, step_size = 1000, step_size_evol = 100;
+let layer = 0, maxEpoch = 1000, tol = 1e-3, step_size = 1000, step_size_evol = 100;
 let input_file = "simpledata";
 let values = [];
 
 let nn, iteration = [], start_it = false;
 
+let isChrome;
+function preload() {
+  if(navigator.userAgent.indexOf("Chrome") != -1 ) isChrome = true;
+  else isChrome = false;
+}
+
 
 function setup() {
+  console.log(isChrome);
   createCanvas(800, 600);
   
   input = createInput();

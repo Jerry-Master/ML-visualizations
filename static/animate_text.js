@@ -25,6 +25,7 @@ function trajectory(begin, end, time = 100) {
 
 // Sort values by the y coordinate
 function sort_by_y(a, b) {
+  if (isChrome) return a.y - b.y;
   return a.y < b.y;
 }
 
@@ -66,20 +67,25 @@ function forward(total_layers) {
 
     // Clean the neurons, leaving just one value on each one
     values[layer].sort(sort_by_y);
-    let valor = nn[str(iteration[0])].forward[str(layer)][0].toExponential(2);
-    values[layer][0].text = valor;
+    let valor = parseFloat(nn[str(iteration[0])].forward[str(layer)][0]).toExponential(2);
+    values[layer][0].text = str(valor);
     let curr_neuron = 1;
     let aux = [values[layer][0]];
+    let enter = 0;
     for (let i = 1; i < values[layer].length; i++) {
-      if (abs(values[layer][i].y - values[layer][i - 1].y) > 1) {
+      if (abs(values[layer][i].y - values[layer][i - 1].y) > 0.1) {
         // Change text of value
-        let valor = nn[str(iteration[0])].forward[str(layer)][curr_neuron].toExponential(2);
+        enter = enter+1;
+        let valor = parseFloat(nn[str(iteration[0])].forward[str(layer)][curr_neuron]).toExponential(2);
         curr_neuron++;
-        values[layer][i].text = valor;
+        values[layer][i].text = str(valor);
         aux.push(values[layer][i]);
       }
     }
+    console.log(enter);
+    console.log(aux);
     values[layer] = aux;
+    console.log(values);
 
     // Create more object to animate if needed
     for (let i = 0; i < values[layer].length; i++) {
